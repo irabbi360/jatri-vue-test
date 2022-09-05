@@ -1,15 +1,20 @@
-<script setup>
-defineProps({
-  msg: {
-    type: String,
-    required: true
+<script>
+import { computed } from 'vue'
+import { useStore } from 'vuex'
+
+export default {
+  setup () {
+    const store = useStore()
+    return {
+      asyncIncrement: () => store.dispatch('getPosts')
+    }
   }
-})
+}
 </script>
 
 <template>
   <div class="greetings">
-    <h1 class="green">{{ msg }}</h1>
+    <h1 class="green"></h1>
   </div>
 </template>
 
