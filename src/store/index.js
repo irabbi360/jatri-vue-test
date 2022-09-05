@@ -1,11 +1,22 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
 
+// https://stackoverflow.com/questions/65316893/vue-pagination-array-of-objects
+
 const store = createStore({
     state:{
-        posts: ''
+        posts: '',
+        pagination: {
+            page: 1,
+            limit: 10,
+            totalPages: 0,
+        }
     },
-    getters: {},
+    getters: {
+        totalPosts(state) {
+            return state.posts.length;
+        }
+    },
     mutations: {
         GET_POSTS(state, records) {
             state.posts = records
