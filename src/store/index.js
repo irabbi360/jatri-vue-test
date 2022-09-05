@@ -3,17 +3,17 @@ import axios from 'axios';
 
 const store = createStore({
     state:{
-        posts: []
+        posts: ''
     },
     getters: {},
     mutations: {
         GET_POSTS(state, records) {
-            state.posts.push(records)
+            state.posts = records
         }
     },
     actions: {
         getPosts({commit}) {
-            axios.get('').then((response) => {
+            axios.get('https://jsonplaceholder.typicode.com/posts').then((response) => {
                 commit('GET_POSTS', response.data)
             })
         }

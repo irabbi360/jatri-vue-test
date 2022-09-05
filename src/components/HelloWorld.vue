@@ -1,12 +1,15 @@
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 
 export default {
   setup () {
     const store = useStore()
+    store.dispatch('getPosts')
+    const posts = computed(() => store.state.posts);
+
     return {
-      asyncIncrement: () => store.dispatch('getPosts')
+      posts
     }
   }
 }
@@ -14,7 +17,8 @@ export default {
 
 <template>
   <div class="greetings">
-    <h1 class="green"></h1>
+    <h1 class="green">Vue 3</h1>
+    <pre>{{ posts }}</pre>
   </div>
 </template>
 
