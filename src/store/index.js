@@ -28,6 +28,15 @@ const store = createStore({
                 return a == b ? 0 : a > b ? 1 : -1;
             });
         },
+        
+        SORT_POSTS(state, sortKey) {
+            const posts = state.posts;
+            state.posts = posts.sort(function (x, y) {
+                let a = x.title.toUpperCase(),
+                    b = y.title.toUpperCase();
+                return a == b ? 0 : a > b ? sortKey : -1;
+            });
+        },
         SEARCH_POSTS(state, search) {
             if(search) {
                 state.posts = state.posts.filter(post => {

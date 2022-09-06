@@ -9,6 +9,7 @@ export default {
   setup () {
     const store = useStore()
     const search = ref();
+    const sort = ref('1');
     store.dispatch('getPosts')
     const totalPosts = computed(() => store.getters.totalPosts);
     const currentPage = computed(() => store.state.currentPage);
@@ -27,7 +28,10 @@ export default {
     }
 
     return {
+      // access a mutation
+      sortPost: () => store.commit('SORT_POSTS', sort.value),
       posts,
+      sort,
       totalPosts,
       next,
       prev,
@@ -47,6 +51,10 @@ export default {
   <h1>Posts</h1>
   <div style="padding: 10px 0">
     <input type="search" v-model="search" name="search" placeholder="Search here" @input="searchPost">
+    <select v-model="sort" style="margin-left: 10px;" @change="sortPost">
+      <option value="-1">ASC</option>
+      <option value="1">DESC</option>
+    </select>
   </div>
   <DataTable :posts="posts"/>
   <div class="pagination">
