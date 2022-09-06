@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
-
+// https://codepen.io/collinsworth/pen/LYYXYzr
 // https://stackoverflow.com/questions/65316893/vue-pagination-array-of-objects
 
 const store = createStore({
@@ -34,6 +34,17 @@ const store = createStore({
             })
 
             return state.posts
+        },
+        PANGRAM_CHECK(state, search) {
+            let match = 0;
+			
+			state.posts.forEach(letter => {
+				const letterMatch = new RegExp(letter.title, 'gi');
+                console.log(letterMatch, 'letterMatch');
+				if (search.match(letterMatch, 'gi')) match++;
+			});
+			console.log(match, 'match');
+			return match;
         },
         NEXT_PAGE(state, total) {
             if(state.currentPage != (total / state.limit)){

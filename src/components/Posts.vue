@@ -25,6 +25,11 @@ export default {
       store.commit('SEARCH_POSTS', search.value)
     }
 
+    
+    function pangramChecker() {
+      store.commit('PANGRAM_CHECK', search.value)
+    }
+
     return {
       posts,
       totalPosts,
@@ -32,7 +37,8 @@ export default {
       prev,
       currentPage,
       search,
-      searchPost
+      searchPost,
+      pangramChecker
     }
   }
 }
@@ -42,7 +48,7 @@ export default {
   <h1>Posts</h1>
   <div style="padding: 10px 0">
     <input type="search" v-model="search" name="search">
-    <input type="submit" value="Search" @click.prevent="searchPost">
+    <input type="submit" value="Search" @click.prevent="pangramChecker">
   </div>
   <DataTable :posts="posts"/>
   <div class="pagination">
