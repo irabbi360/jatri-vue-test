@@ -1,7 +1,5 @@
 import { createStore } from 'vuex'
 import axios from 'axios';
-// https://codepen.io/collinsworth/pen/LYYXYzr
-// https://stackoverflow.com/questions/65316893/vue-pagination-array-of-objects
 
 const store = createStore({
     state:{
