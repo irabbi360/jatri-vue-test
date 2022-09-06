@@ -8,7 +8,9 @@ const store = createStore({
         posts: '',
         currentPage: 1,
         limit: 10,
-        totalPages: 0
+        totalPages: 0,
+        matchCount: 0,
+        alphabet: Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ"),
     },
     getters: {
         totalPosts(state) {
@@ -36,15 +38,13 @@ const store = createStore({
             return state.posts
         },
         PANGRAM_CHECK(state, search) {
-            let match = 0;
-			
-			state.posts.forEach(letter => {
-				const letterMatch = new RegExp(letter.title, 'gi');
-                console.log(letterMatch, 'letterMatch');
+            let match = 0
+			state.alphabet.forEach(letter => {
+				const letterMatch = new RegExp(letter, 'gi');
 				if (search.match(letterMatch, 'gi')) match++;
 			});
-			console.log(match, 'match');
-			return match;
+			
+			return state.matchCount = match;
         },
         NEXT_PAGE(state, total) {
             if(state.currentPage != (total / state.limit)){

@@ -2,9 +2,10 @@
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
 import DataTable from './DataTable.vue'
+import Pangram from './Pangram.vue'
 
 export default {
-  components: {DataTable},
+  components: {DataTable, Pangram},
   setup () {
     const store = useStore()
     const search = ref();
@@ -25,11 +26,6 @@ export default {
       store.commit('SEARCH_POSTS', search.value)
     }
 
-    
-    function pangramChecker() {
-      store.commit('PANGRAM_CHECK', search.value)
-    }
-
     return {
       posts,
       totalPosts,
@@ -37,14 +33,17 @@ export default {
       prev,
       currentPage,
       search,
-      searchPost,
-      pangramChecker
+      searchPost
     }
   }
 }
 </script>
 
 <template>
+  <div>
+  <pangram />
+</div>
+
   <h1>Posts</h1>
   <div style="padding: 10px 0">
     <input type="search" v-model="search" name="search">
