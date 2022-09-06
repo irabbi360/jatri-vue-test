@@ -41,9 +41,8 @@ export default {
 <template>
   <h1>Posts</h1>
   <div style="padding: 10px 0">
-    <label for="gsearch">Search:</label>
-    <input type="search" v-model="search" id="gsearch" name="gsearch">
-    <input type="submit" @click.prevent="searchPost"> {{ search }}
+    <input type="search" v-model="search" name="search">
+    <input type="submit" value="Search" @click.prevent="searchPost">
   </div>
   <DataTable :posts="posts"/>
   <div class="pagination">
