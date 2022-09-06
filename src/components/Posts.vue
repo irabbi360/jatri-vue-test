@@ -9,16 +9,18 @@ export default {
     const store = useStore()
     store.dispatch('getPosts')
     const posts = computed(() => store.state.posts);
+    const totalPosts = computed(() => store.getters.totalPosts);
 
     return {
-      posts
+      posts,
+      totalPosts
     }
   }
 }
 </script>
 
 <template>
-  <h1>Posts</h1>
+  <h1>Posts - {{ totalPosts }}</h1>
   <DataTable :posts="posts"/>
 </template>
 

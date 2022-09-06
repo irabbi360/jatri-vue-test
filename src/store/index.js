@@ -19,13 +19,17 @@ const store = createStore({
     },
     mutations: {
         GET_POSTS(state, records) {
-            state.posts = records
+            state.posts = records.sort(function (x, y) {
+                let a = x.title.toUpperCase(),
+                    b = y.title.toUpperCase();
+                return a == b ? 0 : a > b ? 1 : -1;
+            });
         }
     },
     actions: {
         getPosts({commit}) {
             axios.get('https://jsonplaceholder.typicode.com/posts').then((response) => {
-                commit('GET_POSTS', response.data)
+                commit('GET_POSTS', response.data);
             })
         }
     }
