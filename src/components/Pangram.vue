@@ -9,7 +9,7 @@ export default {
         const pangram = ref();
         const search = ref();
         const matchCount = computed (() => store.state.matchCount);
-        const totalLetter = computed (() => store.state.alphabet.length)
+        const alphabet = computed (() => store.state.alphabet);
 
         function pangramChecker() {
             store.commit('PANGRAM_CHECK', search.value);
@@ -20,7 +20,7 @@ export default {
             search,
             pangramChecker,
             matchCount,
-            totalLetter
+            alphabet
         }
     },
 }
@@ -30,11 +30,19 @@ export default {
     <input type="text" v-model="search" @input="pangramChecker">
     <div>
         <p>
-		<strong>{{ matchCount }} / {{ totalLetter }}</strong>: Your text is <span v-if="matchCount !== totalLetter">not</span> a pangram
+		<strong>{{ matchCount }} / {{ alphabet.length }}</strong>: Your text is <span v-if="matchCount !== alphabet.length">not</span> a pangram
 	</p>
+    <span v-for="(letter, index) in alphabet" :key="index" class="char">{{ letter }}</span>
     </div>
 </template>
 
 <style scoped>
+.char {
+	background: lightslategray;
+	color: gainsboro;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+}
 
 </style>

@@ -29,13 +29,15 @@ const store = createStore({
             });
         },
         SEARCH_POSTS(state, search) {
-            state.posts = state.posts.filter(post => {
-                return post.title
-                .toUpperCase()
-                .includes(search.toUpperCase())
-            })
-
-            return state.posts
+            if(search) {
+                state.posts = state.posts.filter(post => {
+                    return post.title
+                    .toUpperCase()
+                    .includes(search.toUpperCase())
+                })
+    
+                return state.posts;
+            }
         },
         PANGRAM_CHECK(state, search) {
             let match = 0

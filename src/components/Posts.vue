@@ -46,8 +46,7 @@ export default {
 
   <h1>Posts</h1>
   <div style="padding: 10px 0">
-    <input type="search" v-model="search" name="search">
-    <input type="submit" value="Search" @click.prevent="searchPost">
+    <input type="search" v-model="search" name="search" placeholder="Search here" @input="searchPost">
   </div>
   <DataTable :posts="posts"/>
   <div class="pagination">
