@@ -26,6 +26,15 @@ const store = createStore({
                 return a == b ? 0 : a > b ? 1 : -1;
             });
         },
+        SEARCH_POSTS(state, search) {
+            state.posts = state.posts.filter(post => {
+                return post.title
+                .toUpperCase()
+                .includes(search.toUpperCase())
+            })
+
+            return state.posts
+        },
         NEXT_PAGE(state, total) {
             if(state.currentPage != (total / state.limit)){
                 state.currentPage ++

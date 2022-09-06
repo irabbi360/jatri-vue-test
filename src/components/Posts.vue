@@ -7,6 +7,7 @@ export default {
   components: {DataTable},
   setup () {
     const store = useStore()
+    const search = ref();
     store.dispatch('getPosts')
     const totalPosts = computed(() => store.getters.totalPosts);
     const currentPage = computed(() => store.state.currentPage);
@@ -20,19 +21,30 @@ export default {
       store.commit('NEXT_PAGE', totalPosts.value)
     }
 
+    function searchPost() {
+      store.commit('SEARCH_POSTS', search.value)
+    }
+
     return {
       posts,
       totalPosts,
       next,
       prev,
-      currentPage
+      currentPage,
+      search,
+      searchPost
     }
   }
 }
 </script>
 
 <template>
-  <h1>Posts - {{ totalPosts / 10 }}</h1>
+  <h1>Posts</h1>
+  <div style="padding: 10px 0">
+    <label for="gsearch">Search:</label>
+    <input type="search" v-model="search" id="gsearch" name="gsearch">
+    <input type="submit" @click.prevent="searchPost"> {{ search }}
+  </div>
   <DataTable :posts="posts"/>
   <div class="pagination">
     <a href="javascript:void(0)" @click="prev">&laquo;</a>
