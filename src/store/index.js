@@ -6,15 +6,16 @@ import axios from 'axios';
 const store = createStore({
     state:{
         posts: '',
-        pagination: {
-            page: 1,
-            limit: 10,
-            totalPages: 0,
-        }
+        currentPage: 1,
+        limit: 10,
+        totalPages: 0
     },
     getters: {
         totalPosts(state) {
             return state.posts.length;
+        },
+        allPosts(state) {
+            return state.posts.slice((state.currentPage - 1) * state.limit, (state.currentPage - 1) * state.limit + state.limit);
         }
     },
     mutations: {
@@ -24,6 +25,16 @@ const store = createStore({
                     b = y.title.toUpperCase();
                 return a == b ? 0 : a > b ? 1 : -1;
             });
+        },
+        NEXT_PAGE(state, total) {
+            if(state.currentPage != (total / state.limit)){
+                state.currentPage ++
+            }
+        },
+        PREV_PAGE(state) {
+            if(state.currentPage > 1){
+                state.currentPage--
+            }
         }
     },
     actions: {
